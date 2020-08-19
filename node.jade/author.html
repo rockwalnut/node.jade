@@ -1,0 +1,164 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        nav.menu
+        {
+            text-align: right;
+        }    
+    </style>
+
+    <!-- public static link css -->
+    <link href="/css/site.css" rel="stylesheet" type="text/css">
+
+    <!-- include hogan -->
+    <script src="/scripts/hogan-3.0.2.js"></script>
+
+    <!-- jquery  -->
+    <script src="/scripts/jquery.min.js"></script>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="/scripts/bootstrap.min.css">   
+     
+    <!-- asynce -->
+    <!--<script type="text/javascript" src="/scripts/async.js"></script>-->
+
+    <!-- itself -->
+    <script type="text/javascript">
+
+    //asynce 
+    /*async.map(data, asyncProcess, function(err, results){
+        alert(results);
+    });*/
+
+    $( document ).ready(function() {
+
+        /*var $cont   = $("#contenedor"),
+            data = {
+            revistas:[
+                {
+                numero: 1,
+                titulo: "Eras digitales",
+                fecha: "Jun 2012",
+                   // portada: "http://noumeni.us/blog/wp-content/uploads/2011/11/Tatuarte-Origen.png"   
+                   },
+                {
+                numero: 2,
+                titulo: "la KY",
+                fecha: "Jul 2012",
+                   // portada: "http://noumeni.us/blog/wp-content/uploads/2011/11/Tatuarte-Origen.png"     
+                    }
+                ]
+            },
+            source   = $("#listaRevistas").html(),
+            template = Hogan.compile(source),
+            output = template.render(data);
+
+        console.log(output);
+        $cont.html(output);*/
+
+             var view = {
+                name : "John Doe",
+                occupation : "Web Developer",
+                home : "Pennsylvania",
+                address : "1001 Brinton Rd. Pittsburgh, PA 15221. Western PA"
+            };
+
+            //onload
+            {
+                $("#templates").load("/partial/about #template1",function(){
+                var source = $("#template1").html();
+                var template = Hogan.compile(source);
+
+                var output = template.render(view);
+                $("#person").html(output);
+                });
+            }   
+            
+            // listener
+            $( "#a-about" ).click(function() {           
+                $("#templates").load("/partial/about #template1",function(){
+                var source = $("#template1").html();
+                var template = Hogan.compile(source);
+
+                var output = template.render(view);
+                $("#person").html(output);
+                });
+            });
+
+            // listener
+            $( "#a-home" ).click(function() {           
+                $("#templates").load("/partial/home #template2",function(){
+                var source = $("#template2").html();
+                var template = Hogan.compile(source);
+
+                var output = template.render(view);
+                $("#person").html(output);
+                });
+            });
+
+      });
+
+    
+    </script>
+
+
+    <!-- template -->
+    <script id="listaRevistas" type="text/x-hogan-template">
+
+        <div class="group">
+            <ul class="listaRevistas">
+                {{#revistas}}
+                <li class="portada">
+                    <a href="#" title="leer {{titulo}}">
+                        <img src="{{portada}}" alt="{{titulo}}" />
+                    </a>
+                    <ul class="stats-tabs">
+                        <li><a href="#">#{{numero}}<span>Numero</span></a></li>
+                        <li><a href="#">{{fecha}}<span>Fecha</span></a></li>
+                    </ul>
+                </li>
+                {{/revistas}}
+            </ul>
+        </div>   
+    </script>
+    
+<meta charset="UTF-8">
+<title>Author</title>
+</head>
+
+<body class="container" >
+
+    <nav class="menu">
+        <a href="javascript:void(0)" id="a-home" >Home</a> | <a href="javascript:void(0)" id="a-about"  >About</a> | <a href="#" >Register</a> 
+    </nav>
+
+    <h1> {{ #hoganjs }} </h1>
+
+    <hr>
+
+    <!--<div id="contenedor" class="group">
+
+    </div>-->
+    
+
+    <p id="person"></p>
+    <div id="templates" style="display: none;"></div>
+
+    <hr/>
+
+        <nav class="page">
+            <ul>
+                <li class="page-prev"><a href="#">Prev </a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li class="page-next"><a href="#">Next </a></li>
+            </ul>
+        </nav> 
+
+</body>
+
+</html>
